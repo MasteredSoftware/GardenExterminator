@@ -17,20 +17,29 @@ class Tile extends Component {
 		super(props);
 
 		var bounce = new Animated.Value(0);
-		var interpolated = bounce.interpolate({
-			inputRange: [0, 1],
-			outputRange: ['0deg', '-30deg']
-		});
 		var style = {
 			left: props.left,
 			top: props.top
 		};
 		var animated_style = {
-			transform: [{perspective: 50},
-				{rotateX: interpolated}]
+			flex: 1,
+			transform: [                        // `transform` is an ordered array
+				{scale: bounce},  // Map `bounce` to `scale`
+			]
 		};
 
 		this.state = {bounce, style, animated_style};
+	}
+
+	componentDidMount() {
+		this.state.bounce.setValue(1.5);     // Start large
+		Animated.spring(                          // Base: spring, decay, timing
+			this.state.bounce,                 // Animate `bounceValue`
+			{
+				toValue: 1,                         // Animate to smaller size
+				friction: 1,                          // Bouncier spring
+			}
+		).start();                                // Start the animation
 	}
 
 	render() {
@@ -42,9 +51,9 @@ class Tile extends Component {
 	}
 
 	clickTile() {
-		this.state.bounce.setValue(1); // mapped to -30 degrees
+		this.state.bounce.setValue(1.2); // bounce larger
 		Animated.timing(this.state.bounce, {
-			toValue: 0, // mapped to 0 degrees (no bounce)
+			toValue: 1, // bounce back
 			duration: 250, // milliseconds
 			easing: Easing.quad // quadratic easing function: (t) => t * t
 		}).start();
