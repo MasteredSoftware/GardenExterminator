@@ -1,28 +1,30 @@
-'use strict';
+import React, { Component } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux'
 
-var React = require('react-native');
-var {
-	StyleSheet,
-	View,
-	} = React;
+import App from './app/components/app.js'
 
-var GardenView = require('./gardenview.js');
+import geApp from './app/reducers'
 
-var Main = React.createClass({
+let store = createStore(geApp);
+
+/*
+export default class Main extends Component {
 	render() {
-		return <View style={styles.container}>
-			<GardenView/>
-		</View>;
-	},
-});
+		return (
+			<Provider store={store}>
+				<App />
+			</Provider>
+		);
+	}
+}
+*/
+const Main = () => {
+	return (
+		<Provider store={store}>
+			<App />
+		</Provider>
+	)
+};
 
-var styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#008000',
-	},
-});
-
-module.exports = Main;
+export default Main

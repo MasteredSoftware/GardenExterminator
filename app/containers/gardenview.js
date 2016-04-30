@@ -10,7 +10,11 @@ var {
 	Animated,
 	Easing,
 	} = React;
-var Tile = require('./tile.js');
+
+import { connect } from 'react-redux'
+import { hitNone, hitBad, hitGood } from '../actions'
+
+var Tile = require('./../components/tile.js');
 
 var {width, height} = require('Dimensions').get('window');//get window dimensions
 var MAX_GRID_SIZE = 4; // width and height of the grid
@@ -25,7 +29,6 @@ var EMOJI_NAME_LIST_FRIENDLY = ['beetle', 'bee', 'cat2', 'dog2', 'seedling', 'tu
 class GardenView extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {"points":0};
 	}
 
 	render() {
@@ -42,7 +45,7 @@ class GardenView extends Component {
 				var name = EMOJI_NAME_LIST_ENEMY.concat(EMOJI_NAME_LIST_FRIENDLY)[id];
 				var left = col * CELL_SIZE + CELL_PADDING,
 					top = row * CELL_SIZE + CELL_PADDING;
-				result.push(<Tile key={id} name={name} styles={styles} left={left} top={top} />);
+				result.push(<Tile key={id} name={name} styles={styles} left={left} top={top} onClick={(name) => this.props.onTileClick(name)} />);
 			}
 		}
 		return result;
@@ -73,4 +76,19 @@ var styles = StyleSheet.create({
 	},
 });
 
-module.exports = GardenView;
+const mapStateToProps = (state) => {
+	return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onTileClick: (name) => {
+			dispatch(hitGood(name))
+		}
+	}
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(GardenView);

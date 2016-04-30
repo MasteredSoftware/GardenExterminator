@@ -9,6 +9,7 @@ var {
 	View,
 	Animated,
 	Easing,
+	PropTypes,
 	} = React;
 var Emoji = require('react-native-emoji');
 
@@ -57,7 +58,17 @@ class Tile extends Component {
 			duration: 250, // milliseconds
 			easing: Easing.quad // quadratic easing function: (t) => t * t
 		}).start();
+		this.props.onClick(this.props.name);
 	}
 }
 
+/*
+Tile.propTypes = {
+	onClick: PropTypes.func.isRequired,
+	left: PropTypes.number.isRequired,
+	top: PropTypes.number.isRequired,
+	name: PropTypes.string.isRequired
+};
+*/
+//export default Tile;
 module.exports = Tile;
