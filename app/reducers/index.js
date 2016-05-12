@@ -22,7 +22,7 @@ const hit = (action) => {
 	}
 };
 
-const hits = (state = {level:0, points:0, hits:[]}, action) => {
+const hits = (state = {level:0, hits:[]}, action) => {
 	var newState = Object.assign({}, state);
 	switch (action.type) {
 		case 'NO_HIT':
@@ -35,8 +35,12 @@ const hits = (state = {level:0, points:0, hits:[]}, action) => {
 	}
 };
 
+/*
 const geApp = combineReducers({
 	hits
 });
 
 export default geApp
+	*/
+
+export default hits;
