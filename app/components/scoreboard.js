@@ -8,7 +8,7 @@ import React, {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-	text: {
+	textbox: {
 		width: 100,
 		height: 30,
 		padding: 10,
@@ -19,14 +19,18 @@ const styles = StyleSheet.create({
 	}
 });
 
-const Scoreboard = ({ score }) => (
-	<View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-		<Text style={styles.text}>{score}</Text>
+const Scoreboard = ({ score, level }) => (
+	<View style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+		<Text>Level:</Text>
+		<Text style={styles.textbox}>{level+1}</Text>
+		<Text>Score:</Text>
+		<Text style={styles.textbox}>{score}</Text>
 	</View>
 )
 
 Scoreboard.propTypes = {
-	score: PropTypes.number.isRequired
+	score: PropTypes.number.isRequired,
+	level: PropTypes.number.isRequired
 }
 
 export default Scoreboard

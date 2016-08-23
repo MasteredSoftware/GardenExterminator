@@ -11,6 +11,10 @@ EMOJI_NAME_LIST_FRIENDLY.forEach((n) => {
 	EMOJI_TYPE_BY_NAME[n] = {type:'FRIENDLY', name: n};
 });
 
+const constants = {
+	MAX_GRID_SIZE: 5 // width and height of the grid
+};
+
 exports.getEmojiType = function(name) {
 	return EMOJI_TYPE_BY_NAME[name];
 };
@@ -23,3 +27,5 @@ exports.getRandomEmojiName = function() {
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 }
+
+export default constants;

@@ -18,8 +18,8 @@ class App extends React.Component {
 
 	render() {
 		return <View style={styles.container}>
-			<Scoreboard score={this.props.score} />
-			<GardenView />
+			<Scoreboard score={this.props.score} level={this.props.level} />
+			<GardenView tiles={this.props.tiles} />
 		</View>;
 	}
 }
@@ -27,6 +27,7 @@ class App extends React.Component {
 var styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#008000',
